@@ -1,0 +1,67 @@
+version: "3.9"
+
+x-template-backend:
+  &template_backend
+  user: web
+  build:
+    context: .
+  env_file:
+    - .env
+
+services:
+  backend:
+    << : *template_backend
+    container_name: backend_container
+    command: python3 start.py
+    ports:
+      - "8000:8000"
+  faust:
+    <<: *template_backend
+    container_name: faust
+    command: faust -A src.agents worker --without-web -l info
+    restart: on-failure
+  zookeeper:
+    image: bitnami/zookeeper:3.7.0
+    container_name: zookeeper
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  kafka:
+    image: bitnami/kafka:3.0.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - 9093:9093
+    volumes:
+      - kafka-data:/data/kafka/
+    environment:
+      KAFKA_BROKER_ID: 1
+      ALLOW_PLAINTEXT_LISTENER: 1
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CFG_LISTENERS: CLIENT://:9092,EXTERNAL://:9093
+      KAFKA_CFG_ADVERTISED_LISTENERS: CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
+  clickhouse:
+    image: clickhouse/clickhouse-server:21.8.11.4
+    container_name: clickhouse
+    hostname: clickhouse
+    ports:
+      - 8123:8123
+      - 9000:9000
+    volumes:
+      - ./compose-services-data/clickhouse/node1:/etc/clickhouse-server
+      - clickhouse-data:/data/clickhouse/
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/:z
+    depends_on:
+      - zookeeper
+
+volumes:
+  kafka-data:
+  clickhouse-data:
+
+networks:
+  default:
+    name: ugc-network
