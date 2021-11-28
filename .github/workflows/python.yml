@@ -8,13 +8,6 @@ on:
 
 jobs:
   build:
-
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [ 3.7, 3.8, 3.9 ]
-        poetry-version: [ 1.1.4 ]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -55,8 +48,6 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
-        run: black .
 
       - name: wemake-python-styleguide
         uses: wemake-services/wemake-python-styleguide@0.15.3
-        run: flake8 .
