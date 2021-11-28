@@ -48,3 +48,9 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
+      - name: mypy
+        run: |
+          mypy src/
+      - name: isort
+        run: |
+          isort . --check
