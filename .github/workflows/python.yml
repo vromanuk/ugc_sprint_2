@@ -63,6 +63,7 @@ jobs:
           isort . --check
 
       - name: send telegram message on success
+        if: ${{ matrix.python-version }} == '3.9'
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
