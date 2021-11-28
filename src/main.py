@@ -17,7 +17,7 @@ app = FastAPI(
 app.router.include_router(api_router, prefix=settings.API_PREFIX)
 
 
-def get_faust_app():
+def get_faust_app() -> faust.App:
     return faust.App(
         settings.FAUST_PROJECT_NAME,
         broker=f"//{settings.KAFKA_HOST}:{settings.KAFKA_PORT}",
