@@ -57,4 +57,4 @@ jobs:
           options: "--check --verbose"
 
       - name: wemake-python-styleguide
-        uses: wemake-services/wemake-python-styleguide
+        uses: wemake-services/wemake-python-styleguide@0.15.3
