@@ -62,7 +62,7 @@ jobs:
           source .venv/bin/activate
           isort . --check
       - name: wemake-python-styleguide
-        uses: wemake-services/wemake-python-styleguide
+        uses: wemake-services/wemake-python-styleguide@0.15.3
 
       - name: send telegram message on success
         uses: appleboy/telegram-action@master
