@@ -1,3 +1,5 @@
+[![Python application](https://github.com/vromanuk/ugc_sprint_2/actions/workflows/python.yml/badge.svg?branch=main)](https://github.com/vromanuk/ugc_sprint_2/actions/workflows/python.yml)
+
 # UGC service
 
 Сервис отвечает за user generated content: к UGC относится всё, чем пользователь дополняет сайт, например, комментарии и оценки фильмов.
