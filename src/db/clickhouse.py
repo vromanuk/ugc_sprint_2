@@ -22,7 +22,7 @@ class ClickhouseClient:
     )
 
     @classmethod
-    async def track_movie_progress(cls, finished_at: int, movie_id_user_id: str):
+    async def track_movie_progress(cls, finished_at: int, movie_id_user_id: str) -> None:
         event = Event(finished_at=finished_at, movie_id_user_id=movie_id_user_id)
         with ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
             loop = asyncio.get_event_loop()
@@ -35,7 +35,7 @@ class ClickhouseClient:
         max_tries=3,
         jitter=backoff.random_jitter,
     )
-    def track_event(cls, event: Event):
+    def track_event(cls, event: Event) -> None:
         try:
             cls.client.execute(
                 f"INSERT INTO {event._tablename} (finished_at, movie_id_user_id, event_datetime) VALUES",

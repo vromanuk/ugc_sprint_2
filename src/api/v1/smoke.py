@@ -9,5 +9,5 @@ router = APIRouter()
     response_description="200 OK, если сервер принимает и обрабатывает сообщения",
     tags=["smoke"],
 )
-async def smoke():
+async def smoke() -> dict:
     return {"msg": "ok"}
