@@ -50,6 +50,7 @@ jobs:
           options: "--check --verbose"
       - name: mypy
         run: |
+          source .venv/bin/activate
           mypy src/
       - name: isort
         run: |
