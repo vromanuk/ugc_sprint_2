@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from kafka_streams import KafkaConsumer
 
 consumer = KafkaConsumer(

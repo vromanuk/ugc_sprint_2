@@ -15,5 +15,6 @@ movie_progress_topic = app.topic("movie_progress", value_type=MovieProgress)
 async def track_movie_progress(movie_progress: Stream) -> None:
     async for event in movie_progress.group_by(MovieProgress.movie_id_user_id):
         await ClickhouseClient.track_movie_progress(
-            event.finished_at, event.movie_id_user_id
+            event.finished_at,
+            event.movie_id_user_id,
         )

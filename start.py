@@ -9,8 +9,8 @@ if __name__ == "__main__":
     settings = get_settings()
     uvicorn.run(
         "src.main:app",
-        host="0.0.0.0",
-        port=5000,
+        host=settings.APPLICATION_HOST,
+        port=settings.APPLICATION_PORT,
         log_config=LOGGING,
         log_level=getattr(logging, settings.LOG_LEVEL.upper()),
         access_log=False,

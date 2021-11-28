@@ -10,7 +10,7 @@ settings = get_settings()
 
 class Event(BaseModel):
     _tablename: str = PrivateAttr(
-        default=f"{settings.clickhouse_config.CLICKHOUSE_DB_NAME}.{settings.clickhouse_config.CLICKHOUSE_EVENT_TABLE}"
+        default=f"{settings.clickhouse_config.CLICKHOUSE_DB_NAME}.{settings.clickhouse_config.CLICKHOUSE_EVENT_TABLE}",
     )
 
     finished_at: Optional[int] = 0

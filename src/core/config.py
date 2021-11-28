@@ -1,4 +1,4 @@
-import os
+import pathlib
 from functools import lru_cache
 from logging import config as logging_config
 
@@ -20,8 +20,9 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "ugc"
     LOG_LEVEL: str = "debug"
     API_PREFIX: str = "/api/v1"
-
-    BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    APPLICATION_PORT: int = 5000
+    APPLICATION_HOST: str = "0.0.0.0"  # noqa: S104
+    BASE_DIR = pathlib.Path(__file__).parent
 
     clickhouse_config: ClickhouseConfig = ClickhouseConfig()
 
