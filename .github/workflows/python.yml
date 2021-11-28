@@ -55,3 +55,8 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
+
+      - name: wemake-python-styleguide
+        uses: wemake-services/wemake-python-styleguide
+      - name: Custom Action
+        run: echo "{{ steps.wemake-python-styleguide.outputs.output }}"
