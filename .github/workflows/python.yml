@@ -53,16 +53,18 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
-      - name: mypy
+      - name: Run `mypy`
         run: |
           source .venv/bin/activate
           mypy src/
-      - name: isort
+      - name: Run `isort`
         run: |
           source .venv/bin/activate
           isort . --check
-      - name: wemake-python-styleguide
-        uses: wemake-services/wemake-python-styleguide@0.15.3
+      - name: Run `flake8`
+        run: |
+          source .venv/bin/activate
+          flake 8 .
 
       - name: send telegram message on success
         uses: appleboy/telegram-action@master
