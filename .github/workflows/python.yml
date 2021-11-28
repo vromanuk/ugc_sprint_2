@@ -47,8 +47,3 @@ jobs:
     - uses: psf/black@stable
       with:
         options: "--check --verbose"
-      run:
-        black .
-
-#    - name: wemake-python-styleguide
-#      uses: wemake-services/wemake-python-styleguide
