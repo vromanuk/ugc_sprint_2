@@ -13,6 +13,8 @@ pydantic = {version = "1.8.2", extras = ["dotenv"]}
 faust = "^1.10.4"
 backoff = "^1.11.1"
 clickhouse-driver = "^0.2.2"
+sentry-sdk = "^1.5.0"
+python-logstash = "^0.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

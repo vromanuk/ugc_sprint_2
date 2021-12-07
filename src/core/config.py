@@ -17,8 +17,11 @@ class ClickhouseConfig(BaseSettings):
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "ugc"
+    SENTRY_DNS: str
+    SENTRY_ENVIRONMENT: str = "dev"
     LOG_LEVEL: str = "debug"
+
+    PROJECT_NAME: str = "ugc"
     API_PREFIX: str = "/api/v1"
     APPLICATION_PORT: int = 5000
     APPLICATION_HOST: str = "0.0.0.0"  # noqa: S104
